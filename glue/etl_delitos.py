@@ -35,14 +35,17 @@ pob = spark.read.csv(
 months = ["enero","febrero","marzo","abril","mayo","junio",
           "julio","agosto","septiembre","octubre","noviembre","diciembre"]
 
-# Melt the 12 month columns into a single column
-delitos_long = delitos.unpivot(
-    ids=["año", "entidad_clave", "entidad_nombre",
-         "bien_juridico_afectado", "tipo_delito",
-         "subtipo_delito", "modalidad", "sexo", "rango_edad"],
-    values=months,
-    variableColumnName="month_name",
-    valueColumnName="count"
+# Build stack expression manually
+stack_expr = f"stack({len(months)}, " + ", ".join(
+    [f"'{m}', `{m}`" for m in months]
+) + ") as (month_name, count)"
+
+id_cols = ["año", "entidad_clave", "entidad_nombre",
+           "bien_juridico_afectado", "tipo_delito",
+           "subtipo_delito", "modalidad", "sexo", "rango_edad"]
+
+delitos_long = delitos.select(
+    id_cols + [F.expr(stack_expr)]
 )
 
 # Map month name to month number
