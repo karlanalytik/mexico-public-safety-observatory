@@ -83,7 +83,11 @@ delitos_pop = delitos_pop.withColumn(
     (F.col("total_count") / F.col("total_population")) * 100000
 )
 
-# 6. Save to processed/ as Parquet --------------------------------------------
+# 6. Additional modifications 
+
+delitos_pop = delitos_pop.withColumnRenamed("año", "anio")
+
+# 7. Save to processed/ as Parquet --------------------------------------------
 
 delitos_pop.write.mode("overwrite").parquet(
     f"s3://{BUCKET}/processed/delitos_rate/"
