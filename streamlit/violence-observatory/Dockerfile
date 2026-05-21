@@ -7,9 +7,6 @@ RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
 RUN pip install streamlit pandas numpy scikit-learn great-tables --no-cache-dir
 
 COPY frontend/ ./frontend/
-COPY backend/ ./backend/
-COPY artifacts/ ./artifacts/
-COPY data/analysis/ ./data/analysis/
 COPY .streamlit/ ./.streamlit/
 
 EXPOSE 8501
