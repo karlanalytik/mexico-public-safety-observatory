@@ -9,10 +9,12 @@ dependencies:
   - pandas
   - numpy
   - matplotlib
-  - plotnine
-  - scikit-learn
-  - mypy
   - jupyterlab
   - ipykernel
   - streamlit
-  - great_tables
+  - plotly
+  - boto3
+  - awswrangler
+  - pip
+  - pip:
+      - great-tables
