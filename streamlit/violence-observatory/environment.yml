@@ -7,7 +7,6 @@ dependencies:
   - black
   - pylint
   - pandas
-  - numpy
   - matplotlib
   - jupyterlab
   - ipykernel

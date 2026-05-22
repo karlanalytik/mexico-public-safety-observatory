@@ -4,10 +4,11 @@ WORKDIR /app
 
 RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
 
-RUN pip install streamlit pandas numpy plotly boto3 awswrangler great-tables --no-cache-dir
+RUN pip install streamlit pandas plotly boto3 awswrangler great-tables --no-cache-dir
 
 COPY frontend/ ./frontend/
 COPY .streamlit/ ./.streamlit/
+COPY data/ ./data/
 
 EXPOSE 8501
 
