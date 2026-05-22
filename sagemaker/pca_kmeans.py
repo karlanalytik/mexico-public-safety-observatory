@@ -200,10 +200,10 @@ def save_to_s3(df: pd.DataFrame, key: str) -> None:
         key: S3 key (path within bucket)
     """
     s3 = boto3.client('s3')
-    buffer = io.StringIO()
-    df.to_parquet(buffer, index=False)
+    buffer = io.BytesIO()
+    df.to_parquet(buffer, index=False, engine='pyarrow')
     buffer.seek(0)
-    s3.put_object(Bucket=BUCKET, Key=key, Body=buffer.getvalue())
+    s3.put_object(Bucket=BUCKET, Key=key, Body=buffer.read())
     print(f"Saved s3://{BUCKET}/{key}")
 
 
