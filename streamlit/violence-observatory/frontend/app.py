@@ -15,7 +15,7 @@ import streamlit as st
 from src.data import load_app_data
 
 # --- setup
-BUCKET = "itam-anlytics-karla"
+BUCKET = "mexico-public-safety-observatory"
 GEOJSON_PATH = Path(__file__).resolve().parents[1] / "data" / "estados-poligonos.geojson"
 
 # --- Read data
